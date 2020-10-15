@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  nodejs_mongo_docker3:
+    image: masieu/nodejs_mongo_docker3
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/user/src/app
+    depends_on: 
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports: 
+      - 27017:27017
+    volumes:
+      - data:/data/db
+  
+  adminmongo:
+    image: mrvautin/adminmongo
+    ports: 
+      - 1234:1234
+
+volumes: 
+  data:
+
